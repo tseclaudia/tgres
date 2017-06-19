@@ -100,6 +100,8 @@ func GraphiteRenderHandler(rcache dsl.NamedDSFetcher) http.HandlerFunc {
                 go func(wg *sync.WaitGroup, target string, targets [][]*graphiteSeries, n int) {
                     if sm, err := processTarget(rcache, target, from.Unix(), to.Unix(), int64(points)); err == nil {
                         targets[n] = readDataPoints(sm)
+                        log.Printf("able to process target")
+
                     } else {
                         log.Printf("RenderHandler(): %v", err)
                     }
